@@ -1,0 +1,726 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={NYPD shooting data project},
+  pdfauthor={Kyle Ritland},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{NYPD shooting data project}
+\author{Kyle Ritland}
+\date{2023-02-21}
+
+\begin{document}
+\maketitle
+
+\hypertarget{what-questions-do-you-hope-to-answer}{%
+\subsection{What questions do you hope to
+answer}\label{what-questions-do-you-hope-to-answer}}
+
+In this paper I hope to answer three questions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  How have the number of shooting incidents changed over time? Have they
+  changed periodically, have they remained constant over time, have they
+  been increasing or decreasing? Has the same been true for murders?
+\item
+  Are shooting rates a predictor of murder rates?
+\item
+  Have particular ethnic groups been the target of shooting incidents?
+  Has one group been the victim more often than others, have different
+  groups become the majority victimized group over time or has it been
+  roughly consistently one group over time?
+\end{enumerate}
+
+\hypertarget{why-are-these-questions-important}{%
+\subsection{Why are these questions
+important?}\label{why-are-these-questions-important}}
+
+In the United States, a multitude of different racial groups make up the
+population, and it is important to investigate if or if not all racial
+and ethnic groups are treated equally, exposed to the same environments
+that every other racial group is, are at the same level of finanacial
+security as other groups. For instance, from U.S. census data, we know
+that the average net worth of a house with a black homeowener was around
+\$10,000, while for a non-hispanic white homeowner, the average was over
+\$170,000, a 1,700\% difference in net worth
+(\url{https://www.census.gov/library/stories/2021/09/understanding-equity-through-census-bureau-data.html}).
+
+With such stark differences between groups existing in the present day,
+it is important for american citizens to be aware of such differences so
+that they can affect change in their communities and their country. Many
+communities across the U.S. are just as racially and ethnically diverse
+as the country as a whole, sometimes more so. For citizens to better
+their communities, they have to know what areas of their communities
+need the most attention, and in many cases, those areas tend to focused
+on groups of a particular racial identity.
+
+\hypertarget{libraries-to-import}{%
+\subsection{Libraries to import}\label{libraries-to-import}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.2 --
+## v ggplot2 3.4.0     v purrr   1.0.1
+## v tibble  3.1.8     v dplyr   1.1.0
+## v tidyr   1.3.0     v stringr 1.5.0
+## v readr   2.1.3     v forcats 1.0.0
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(lubridate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'lubridate'
+## 
+## The following objects are masked from 'package:base':
+## 
+##     date, intersect, setdiff, union
+\end{verbatim}
+
+\hypertarget{data-to-get}{%
+\subsection{Data to get}\label{data-to-get}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{url\_in }\OtherTok{\textless{}{-}} \StringTok{"https://data.cityofnewyork.us/api/views/833y{-}fsy8/rows.csv?accessType=DOWNLOAD"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(url\_in)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 25596 Columns: 19
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr  (10): OCCUR_DATE, BORO, LOCATION_DESC, PERP_AGE_GROUP, PERP_SEX, PERP_R...
+## dbl   (7): INCIDENT_KEY, PRECINCT, JURISDICTION_CODE, X_COORD_CD, Y_COORD_CD...
+## lgl   (1): STATISTICAL_MURDER_FLAG
+## time  (1): OCCUR_TIME
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\hypertarget{preparing-data-for-analysis}{%
+\subsection{Preparing data for
+analysis}\label{preparing-data-for-analysis}}
+
+\hypertarget{clean-data-for-question-1-and-2}{%
+\subsubsection{Clean data for question 1 and
+2}\label{clean-data-for-question-1-and-2}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  Group data by date, convert column `STATISTICAL\_MURDER\_FLAG' into
+  numerical format for later summation and create columns for year,
+  month and date.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_cln }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(OCCUR\_DATE) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarize}\NormalTok{(}\AttributeTok{Num\_shootings =} \FunctionTok{sum}\NormalTok{(STATISTICAL\_MURDER\_FLAG) }\SpecialCharTok{+} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\NormalTok{STATISTICAL\_MURDER\_FLAG), }\AttributeTok{Num\_murders =} \FunctionTok{sum}\NormalTok{(STATISTICAL\_MURDER\_FLAG),) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{separate}\NormalTok{(}\StringTok{"OCCUR\_DATE"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"Month"}\NormalTok{, }\StringTok{"Day"}\NormalTok{, }\StringTok{"Year"}\NormalTok{), }\AttributeTok{sep =} \StringTok{"/"}\NormalTok{,}\AttributeTok{remove =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Create a new column comprised of only year and month.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_cln\_y\_m }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Year\_Month =} \FunctionTok{as.Date}\NormalTok{(}\FunctionTok{with}\NormalTok{(data\_cln,}\FunctionTok{paste}\NormalTok{(Year,Month,}\StringTok{"01"}\NormalTok{,}\AttributeTok{sep=}\StringTok{"{-}"}\NormalTok{)),}\AttributeTok{format=}\StringTok{"\%Y{-}\%m{-}\%d"}\NormalTok{), )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Group data by the new year and month column
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_cln\_y\_m }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_y\_m }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(Year\_Month) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarize}\NormalTok{(}\AttributeTok{Num\_shootings =} \FunctionTok{sum}\NormalTok{(Num\_shootings), }\AttributeTok{Num\_murders =} \FunctionTok{sum}\NormalTok{(Num\_murders)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{clean-data-for-question-3}{%
+\subsubsection{Clean data for question
+3}\label{clean-data-for-question-3}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  Group data by date and recorded victim race, convert column
+  `STATISTICAL\_MURDER\_FLAG' into numerical format for later summation
+  and create columns for year, month and date.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ethnicities }\OtherTok{=} \FunctionTok{sort}\NormalTok{(}\FunctionTok{unique}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{VIC\_RACE))}
+
+\NormalTok{data\_cln\_eth }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(OCCUR\_DATE, VIC\_RACE) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarize}\NormalTok{(}\AttributeTok{Num\_shootings =} \FunctionTok{sum}\NormalTok{(STATISTICAL\_MURDER\_FLAG) }\SpecialCharTok{+} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\NormalTok{STATISTICAL\_MURDER\_FLAG), }\AttributeTok{Num\_murders =} \FunctionTok{sum}\NormalTok{(STATISTICAL\_MURDER\_FLAG),) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{separate}\NormalTok{(}\StringTok{"OCCUR\_DATE"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"Month"}\NormalTok{, }\StringTok{"Day"}\NormalTok{, }\StringTok{"Year"}\NormalTok{), }\AttributeTok{sep =} \StringTok{"/"}\NormalTok{,}\AttributeTok{remove =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'OCCUR_DATE'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Create a new column comprised of only year and month.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_cln\_eth }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_eth }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Year\_Month =} \FunctionTok{as.Date}\NormalTok{(}\FunctionTok{with}\NormalTok{(data\_cln\_eth,}\FunctionTok{paste}\NormalTok{(Year,Month,}\StringTok{"01"}\NormalTok{,}\AttributeTok{sep=}\StringTok{"{-}"}\NormalTok{)),}\AttributeTok{format=}\StringTok{"\%Y{-}\%m{-}\%d"}\NormalTok{), )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Group data by the new year/month column and victim raze column
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_cln\_eth\_y\_m }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_eth }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(Year\_Month, VIC\_RACE) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarize}\NormalTok{( }\AttributeTok{Num\_shootings =} \FunctionTok{sum}\NormalTok{(Num\_shootings), }\AttributeTok{Num\_murders =} \FunctionTok{sum}\NormalTok{(Num\_murders)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'Year_Month'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Combine the data frame from question 1 with the new data frame, so as
+  to pair the total number of shootings and murders with the number of
+  shootings and murders for each victim race category.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_cln\_eth\_y\_m }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(data\_cln\_eth\_y\_m, data\_cln\_y\_m, }\AttributeTok{by=}\FunctionTok{c}\NormalTok{(}\StringTok{"Year\_Month"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{rename}\NormalTok{(}\StringTok{"Num\_shootings\_eth"} \OtherTok{=} \StringTok{"Num\_shootings.x"}\NormalTok{, }\StringTok{"Num\_shootings\_tot"} \OtherTok{=} \StringTok{"Num\_shootings.y"}\NormalTok{,}\StringTok{"Num\_murders\_eth"} \OtherTok{=} \StringTok{"Num\_murders.x"}\NormalTok{, }\StringTok{"Num\_murders\_tot"} \OtherTok{=} \StringTok{"Num\_murders.y"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Use the columns of shootings and murders for each ethnicity category
+  with the total number of shootings and murders to determine the
+  percentage of the data each ethnicity makes up of the total data.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_cln\_eth\_y\_m }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_eth\_y\_m }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{shootings\_perc =}\NormalTok{ Num\_shootings\_eth}\SpecialCharTok{/}\NormalTok{Num\_shootings\_tot, }\AttributeTok{murders\_perc =}\NormalTok{ Num\_murders\_eth}\SpecialCharTok{/}\NormalTok{Num\_murders\_tot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Create a new data frame to record the overall percentage that each
+  ethnic group constitutes of the total data.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_cln\_eth\_tots }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_eth }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(VIC\_RACE) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarize}\NormalTok{( }\AttributeTok{Num\_shootings =} \FunctionTok{sum}\NormalTok{(Num\_shootings), }\AttributeTok{Num\_murders =} \FunctionTok{sum}\NormalTok{(Num\_murders)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Num\_shootings\_tot =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{sum}\NormalTok{(data\_cln\_y\_m}\SpecialCharTok{$}\NormalTok{Num\_shootings), }\AttributeTok{length.out =} \FunctionTok{length}\NormalTok{(ethnicities)), }\AttributeTok{Num\_murders\_tot =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{sum}\NormalTok{(data\_cln\_y\_m}\SpecialCharTok{$}\NormalTok{Num\_murders), }\AttributeTok{length.out =} \FunctionTok{length}\NormalTok{(ethnicities))) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_cln\_eth\_tots }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_eth\_tots }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{shootings\_perc =}\NormalTok{ Num\_shootings}\SpecialCharTok{/}\NormalTok{Num\_shootings\_tot, }\AttributeTok{murders\_perc =}\NormalTok{ Num\_murders}\SpecialCharTok{/}\NormalTok{Num\_murders\_tot)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{model-for-question-2}{%
+\subsection{Model for question 2}\label{model-for-question-2}}
+
+Next I will make a linear model of murders as a function of shooting
+incidents, to see if there is a statistically significant correlation
+between shooting incident rates and murder rates. Then, I will add that
+data to the original data frame for use in graphing.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Num\_murders }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Num\_shootings, data\_cln\_y\_m)}
+
+\NormalTok{nyc\_final\_data }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_y\_m }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{( }\AttributeTok{murders\_pred=} \FunctionTok{predict}\NormalTok{(model))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{analysis}{%
+\subsection{Analysis}\label{analysis}}
+
+\hypertarget{analysis-of-question-1}{%
+\subsubsection{Analysis of Question 1}\label{analysis-of-question-1}}
+
+Here is a graph of the total shooting incidents over the span of data
+collection.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{shootings\_plot }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_y\_m }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year\_Month)) }\SpecialCharTok{+} \FunctionTok{geom\_area}\NormalTok{( }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ Num\_shootings), }\AttributeTok{fill=}\StringTok{"grey50"}\NormalTok{, }\AttributeTok{color =} \DecValTok{1}\NormalTok{, }\AttributeTok{lwd =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{linetype =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_x\_date}\NormalTok{(}\AttributeTok{date\_labels =} \StringTok{"\%Y{-}\%b"}\NormalTok{, }\AttributeTok{date\_breaks =} \StringTok{"2 year"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{350}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{vjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{hjust=}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Number of shooting incidents per month,}\SpecialCharTok{\textbackslash{}n}\StringTok{Jan{-}2006 to Dec{-}2022"}\NormalTok{, }\AttributeTok{x=} \StringTok{"Year{-}Month"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Number of shooting incidents,}\SpecialCharTok{\textbackslash{}n}\StringTok{per month"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## i Please use `linewidth` instead.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(shootings\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NYPD-shooting-data-project_files/figure-latex/plot_1-1.pdf}
+
+Interestingly, there does appear to be a cyclical nature to shooting
+incident rates in NYC over the data collection period. If you look at
+the peaks and troughs, every peak resides in summer months, while
+troughs reside in winter months, and shooting incident numbers
+increasing into the summer peak and decreasing into the winter trough.
+Every low point of a trough lies on the month of January or February. In
+addition, shooting rates have been decreasing over time, and decreasing
+in discrete steps, up until 2020, when the COVID-19 pandemic started.
+
+Now lets look and see if the murder rates in NYC also showed the same
+seasonal pattern as overall shooting incidents. Below is a graph showing
+the number of shooting incidents that resulted in murder.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{murders\_plot }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_y\_m }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year\_Month)) }\SpecialCharTok{+} \FunctionTok{geom\_area}\NormalTok{( }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ Num\_murders), }\AttributeTok{fill=}\StringTok{"red"}\NormalTok{, }\AttributeTok{color =} \DecValTok{1}\NormalTok{, }\AttributeTok{lwd =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{linetype =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_x\_date}\NormalTok{(}\AttributeTok{date\_labels =} \StringTok{"\%Y{-}\%b"}\NormalTok{, }\AttributeTok{date\_breaks =} \StringTok{"2 year"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{350}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{vjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{hjust=}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Number of murders per month,}\SpecialCharTok{\textbackslash{}n}\StringTok{2006{-}Jan to 2022{-}Dec"}\NormalTok{, }\AttributeTok{x=} \StringTok{"Year{-}Month"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Number of murders,}\SpecialCharTok{\textbackslash{}n}\StringTok{per month"}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(murders\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NYPD-shooting-data-project_files/figure-latex/plot_2-1.pdf}
+
+Next is the same graph magnified.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{murders\_plot\_zoom }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_y\_m }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year\_Month)) }\SpecialCharTok{+} \FunctionTok{geom\_area}\NormalTok{( }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ Num\_murders), }\AttributeTok{fill=}\StringTok{"red"}\NormalTok{, }\AttributeTok{color =} \DecValTok{1}\NormalTok{, }\AttributeTok{lwd =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{linetype =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_x\_date}\NormalTok{(}\AttributeTok{date\_labels =} \StringTok{"\%Y{-}\%b"}\NormalTok{, }\AttributeTok{date\_breaks =} \StringTok{"2 year"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{vjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{hjust=}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Number of murders per month,}\SpecialCharTok{\textbackslash{}n}\StringTok{2006{-}Jan to 2022{-}Dec"}\NormalTok{, }\AttributeTok{x=} \StringTok{"Year{-}Month"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Number of murders,}\SpecialCharTok{\textbackslash{}n}\StringTok{per month"}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(murders\_plot\_zoom)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NYPD-shooting-data-project_files/figure-latex/plot_3-1.pdf}
+
+This plot does show the same pattern in murder rates as shooting
+incident rates. You can see the same pattern of deep troughs in winter
+months and sharp peaks in summer months. This is not unexpected, as it
+is a simple and reasonable jump to think that murder rates would also
+follow the same pattern as overall shooting rates. There does seem to be
+variability in that similarity however, where some summer months have
+sharp drops in murder rates and a given year can have very similar
+murder rates month to month, which you can see in 2013. To check and see
+if there is a statistically significant correlation between shooting
+rates and murder rates, we move onto the second quesition I wish to
+answer.
+
+\hypertarget{analysis-of-question-2}{%
+\subsubsection{Analysis of Question 2}\label{analysis-of-question-2}}
+
+Below you will see a scatter plot showing murder rates as a function of
+shooting incidents, with a liner regression best-fit line running
+through the entire plot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model\_plot }\OtherTok{\textless{}{-}}\NormalTok{ nyc\_final\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Num\_shootings)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{Num\_murders)) }\SpecialCharTok{+} \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ murders\_pred, }\AttributeTok{color=}\StringTok{"red"}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Model"}\NormalTok{), }\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{) ) }\SpecialCharTok{+} \FunctionTok{guides}\NormalTok{(}\AttributeTok{color=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{""}\NormalTok{) ) }\SpecialCharTok{+} \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Number of murders per month}\SpecialCharTok{\textbackslash{}n}\StringTok{as a function of total shooting incidents per month"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=} \StringTok{"Shooting incidents per month"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Murders per month"}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(model\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NYPD-shooting-data-project_files/figure-latex/plot_4-1.pdf}
+
+There does appear to be a relationship between shooting rates and murder
+rates. It is not a very precise relationship, as you can see that there
+is a large spread over which the data falls, but it is possible to see
+that the data does cluster along the line drawn by the model. We can
+inspect the different statistics generated by the model below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Num_murders ~ Num_shootings, data = data_cln_y_m)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -13.8922  -4.0361   0.0418   3.6113  21.0418 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   1.142231   1.150882   0.992    0.322    
+## Num_shootings 0.183962   0.008021  22.936   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 5.898 on 190 degrees of freedom
+## Multiple R-squared:  0.7347, Adjusted R-squared:  0.7333 
+## F-statistic:   526 on 1 and 190 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+The model determined that it had a multiple R\^{}2 value of 0.73,
+indicating that the data doesn't cluster strongly along the best fit
+line, This checks out, as we can see in the above graph. The model did
+produce a vanishing p-value, however, which does indicate there is a
+statistically significant relationship between shooting rates and murder
+rates.
+
+However, to check and see if there is any pattern in the residuals of
+the model, we should plot those residuals. You will find that plot
+below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model\_res\_plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(model, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ .fitted, }\AttributeTok{y=}\NormalTok{.resid )) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Residual plot of model"}\NormalTok{, }\AttributeTok{x=} \StringTok{"Predicted murder count"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Residual"}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(model\_res\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NYPD-shooting-data-project_files/figure-latex/plot_5-1.pdf}
+
+At first glance, the residuals do look sufficiently random to indicate
+shooting rates really are a very good predictor of murder rates but if
+you start on the left and move right, you can see a slight horn shape to
+the scatter plot. In addition, the chart is not evenly random: there is
+a clustering of points around murder count = 20. This could indicate
+that there are other predictors that are unaccounted for or that the
+kind of regression used it not the right kind, that a different form of
+regression is needed.
+
+\hypertarget{analysis-of-question-3}{%
+\subsubsection{Analysis of Question 3}\label{analysis-of-question-3}}
+
+To give us a quick overview of how each ethnic group is represented in
+the data.
+
+Here we have a chart showing normalized total shooting rates per month,
+where each racial group in the data is represented as a different color
+and takes up a certain percentage of the total shooting incidents for a
+given month.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{colors\_arr }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"\#1e5e02"}\NormalTok{, }\StringTok{"\#07cbf2"}\NormalTok{,}\StringTok{"\#4daf4a"}\NormalTok{, }\StringTok{"\#fc0000"}\NormalTok{,}\StringTok{"\#ffff99"}\NormalTok{, }\StringTok{"\#4a3f4f"}\NormalTok{,}\StringTok{"\#fc00f4"}\NormalTok{)}
+
+\NormalTok{chart\_perc\_eth\_all }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_eth\_y\_m }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year\_Month, }\AttributeTok{y =}\NormalTok{ Num\_shootings\_eth, }\AttributeTok{fill =}\NormalTok{ VIC\_RACE)) }\SpecialCharTok{+} \FunctionTok{geom\_area}\NormalTok{(}\AttributeTok{position =}\StringTok{"fill"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_x\_date}\NormalTok{(}\AttributeTok{date\_labels =} \StringTok{"\%Y{-}\%b"}\NormalTok{, }\AttributeTok{date\_breaks =} \StringTok{"2 year"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{vjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{hjust=}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Percent of total shootings per racial group,}\SpecialCharTok{\textbackslash{}n}\StringTok{per month, 2006{-}Jan to 2021{-}Dec"}\NormalTok{, }\AttributeTok{x=} \StringTok{"Year{-}Month"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Percent of total shootings,}\SpecialCharTok{\textbackslash{}n}\StringTok{per racial group, per month"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values=}\NormalTok{colors\_arr) }\SpecialCharTok{+} \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{"Victim Race"}\NormalTok{))}
+
+\FunctionTok{plot}\NormalTok{(chart\_perc\_eth\_all)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NYPD-shooting-data-project_files/figure-latex/chart per_eth_all-1.pdf}
+
+As you can see, individuals who identity as black make up the
+overwhelming majority of victims of shooting violence in NYC over the 15
+year time span. Not only are they the ethnic group that is victimized
+the most on average over the time investigated, they are the ethnic
+group that has been victimized the most every month of the past 15
+years, appearing to make up close to the same percentage of targeted
+individuals over time.
+
+Below is a chart focusing in on shooting incidents involving black
+individuals.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chart\_perc\_eth\_black }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_eth\_y\_m[}\FunctionTok{which}\NormalTok{(data\_cln\_eth\_y\_m}\SpecialCharTok{$}\NormalTok{VIC\_RACE }\SpecialCharTok{==}\NormalTok{ ethnicities[}\DecValTok{3}\NormalTok{]),] }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year\_Month, }\AttributeTok{fill =}\NormalTok{ VIC\_RACE)) }\SpecialCharTok{+} \FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ shootings\_perc)) }\SpecialCharTok{+} \FunctionTok{scale\_x\_date}\NormalTok{(}\AttributeTok{date\_labels=}\StringTok{"\%Y{-}\%b"}\NormalTok{,}\AttributeTok{date\_breaks  =}\StringTok{"1 year"}\NormalTok{, }\AttributeTok{limits =} \FunctionTok{as.Date}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}2006{-}01{-}01\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}2021{-}12{-}01\textquotesingle{}}\NormalTok{)) )}\SpecialCharTok{+} \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{vjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{hjust=}\DecValTok{1}\NormalTok{), }\AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{"Victim Race"}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Percentage of shootings incidents}\SpecialCharTok{\textbackslash{}n}\StringTok{involving black victims, per month"}\NormalTok{, }\AttributeTok{x=} \StringTok{"Year{-}Month"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Percent of total shootings"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values=}\NormalTok{colors\_arr[}\DecValTok{3}\NormalTok{]) }\SpecialCharTok{+} \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{"Victim Race"}\NormalTok{))}
+
+\FunctionTok{plot}\NormalTok{(chart\_perc\_eth\_black)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values (`geom_col()`).
+\end{verbatim}
+
+\includegraphics{NYPD-shooting-data-project_files/figure-latex/chart per_eth_black-1.pdf}
+
+We can see more clearly the month-by-month consistency at which black
+individuals are the victims of gun violence. This is illustrated most
+clearly by the chart below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chart\_hist\_perc\_eth\_black }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_eth\_y\_m[}\FunctionTok{which}\NormalTok{(data\_cln\_eth\_y\_m}\SpecialCharTok{$}\NormalTok{VIC\_RACE }\SpecialCharTok{==}\NormalTok{ ethnicities[}\DecValTok{3}\NormalTok{]),] }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{( }\AttributeTok{x =}\NormalTok{ shootings\_perc)) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ colors\_arr[}\DecValTok{3}\NormalTok{]), }\AttributeTok{bins=}\DecValTok{30}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent, }\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Histogram of percentage of total shootings involving black victims"}\NormalTok{, }\AttributeTok{x=} \StringTok{"Percent of total shootings where vitcim is black"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values=}\NormalTok{colors\_arr[}\DecValTok{3}\NormalTok{], }\AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}BLACK\textquotesingle{}}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{"Victim Race"}\NormalTok{)) }
+
+\FunctionTok{plot}\NormalTok{(chart\_hist\_perc\_eth\_black)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values (`geom_bar()`).
+\end{verbatim}
+
+\includegraphics{NYPD-shooting-data-project_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+With this graph, you can see that number of shooting incidents each
+month involving black individuals make up 60\% to 80\% of the total
+shooting instances in NYC over the span of data collection. Below is
+another chart showing the average rates of shooting incidents involving
+each ethnic group.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{shooting\_perc\_plot }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_eth\_tots }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ VIC\_RACE, }\AttributeTok{y =}\NormalTok{ shootings\_perc, }\AttributeTok{fill =}\NormalTok{ VIC\_RACE)) }\SpecialCharTok{+} \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(shootings\_perc}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{2}\NormalTok{), }\StringTok{"\%"}\NormalTok{), }\AttributeTok{y =}\NormalTok{ shootings\_perc }\SpecialCharTok{+} \FloatTok{0.02}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_blank}\NormalTok{()) }\SpecialCharTok{+} \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values=}\NormalTok{colors\_arr)  }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Percentage of shooting incidents per racial group,}\SpecialCharTok{\textbackslash{}n}\StringTok{2006 to 2022"}\NormalTok{, }\AttributeTok{x=} \StringTok{"Victim Race"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Percent composition of total}\SpecialCharTok{\textbackslash{}n}\StringTok{shooting incidents"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{"Victim Race"}\NormalTok{))}
+
+\FunctionTok{plot}\NormalTok{(shooting\_perc\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NYPD-shooting-data-project_files/figure-latex/chart shooting_perc_plot-1.pdf}
+
+Once again, it is clear to see that black individuals are overwhelmingly
+the most victimized racial group. From the earlier investigation into
+whether shooting rates predict murder rates, we can guess that black
+individuals are also a largely present in murder cases. Lets look at the
+next chart to see if that is the case.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chart\_perc\_eth\_black\_mur }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_eth\_y\_m[}\FunctionTok{which}\NormalTok{(data\_cln\_eth\_y\_m}\SpecialCharTok{$}\NormalTok{VIC\_RACE }\SpecialCharTok{==}\NormalTok{ ethnicities[}\DecValTok{3}\NormalTok{]),] }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year\_Month, }\AttributeTok{fill =}\NormalTok{ VIC\_RACE)) }\SpecialCharTok{+} \FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ murders\_perc)) }\SpecialCharTok{+} \FunctionTok{scale\_x\_date}\NormalTok{(}\AttributeTok{date\_labels=}\StringTok{"\%Y{-}\%b"}\NormalTok{,}\AttributeTok{date\_breaks  =}\StringTok{"1 year"}\NormalTok{, }\AttributeTok{limits =} \FunctionTok{as.Date}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}2006{-}01{-}01\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}2021{-}12{-}01\textquotesingle{}}\NormalTok{)) )}\SpecialCharTok{+} \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{vjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{hjust=}\DecValTok{1}\NormalTok{), }\AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{"Victim Race"}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Number of murder per month where victim is black"}\NormalTok{, }\AttributeTok{x=} \StringTok{"Year{-}Month"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Number of shooting incidents,}\SpecialCharTok{\textbackslash{}n}\StringTok{per month"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values=}\NormalTok{colors\_arr[}\DecValTok{3}\NormalTok{]) }\SpecialCharTok{+} \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{"Victim Race"}\NormalTok{))}
+
+\FunctionTok{plot}\NormalTok{(chart\_perc\_eth\_black\_mur)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values (`geom_col()`).
+\end{verbatim}
+
+\includegraphics{NYPD-shooting-data-project_files/figure-latex/chart per_eth_black_mur-1.pdf}
+
+It is clear from this chart that, yes, black individuals are also the
+most murdered racial group in the data set. As there are many high and
+low rates in this graph, it will be more helpful to view this data in
+the form of a histogram.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chart\_hist\_perc\_eth\_black\_mur }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_eth\_y\_m[}\FunctionTok{which}\NormalTok{(data\_cln\_eth\_y\_m}\SpecialCharTok{$}\NormalTok{VIC\_RACE }\SpecialCharTok{==}\NormalTok{ ethnicities[}\DecValTok{3}\NormalTok{]),] }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{( }\AttributeTok{x =}\NormalTok{ murders\_perc)) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ colors\_arr[}\DecValTok{3}\NormalTok{]),}\AttributeTok{bins =} \DecValTok{20}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent, }\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Histogram of percentage of total murders involving black victims"}\NormalTok{, }\AttributeTok{x=} \StringTok{"Percent of total murders where vitcim is black"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values=}\NormalTok{colors\_arr[}\DecValTok{3}\NormalTok{], }\AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}BLACK\textquotesingle{}}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{"Victim Race"}\NormalTok{)) }
+
+\FunctionTok{plot}\NormalTok{(chart\_hist\_perc\_eth\_black\_mur)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values (`geom_bar()`).
+\end{verbatim}
+
+\includegraphics{NYPD-shooting-data-project_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+As you can see, the distribution of murder rates is greater than for
+shooting rates, but with an average and median rate that falls at a
+similar percentage as for shooting rates. Lets inspect the final graphof
+average murder rates involving each ethnic group.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{murder\_perc\_plot }\OtherTok{\textless{}{-}}\NormalTok{ data\_cln\_eth\_tots }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ VIC\_RACE, }\AttributeTok{y =}\NormalTok{ murders\_perc, }\AttributeTok{fill =}\NormalTok{ VIC\_RACE)) }\SpecialCharTok{+} \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(murders\_perc}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{2}\NormalTok{), }\StringTok{"\%"}\NormalTok{), }\AttributeTok{y =}\NormalTok{ murders\_perc }\SpecialCharTok{+} \FloatTok{0.02}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_blank}\NormalTok{()) }\SpecialCharTok{+} \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values=}\NormalTok{colors\_arr) }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Percentage of murders per racial group,}\SpecialCharTok{\textbackslash{}n}\StringTok{2006 to 2022"}\NormalTok{, }\AttributeTok{x=} \StringTok{"Victim Race"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Percent composition of total murders"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{"Victim Race"}\NormalTok{))}
+
+\FunctionTok{plot}\NormalTok{(murder\_perc\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NYPD-shooting-data-project_files/figure-latex/chart murder_perc_plot-1.pdf}
+
+From all of these charts you can see that people who identify or had
+been identified as black are by far the most targeted ethnic group
+historically. In addition, they constantly make up around 3/4 of the
+total number of shooting incidents in NYC, fluctuating between just
+above 50\% to over 80\% of the total shooting incidents.
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+In conclusion, investigating of the data set to answer my questions
+revealed that
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  There was a consistent cyclical pattern to the rates of shooting rates
+  and murder rates in NYC, where rates were highest in the summer
+  months, while rates were lowest in the winter monsths,.
+\item
+  Shooting rates by month are a statistically significant predictor of
+  murder rates in NYC, but they are not a great predictor and there
+  could be other factors not accounted for that influence murder rates
+\item
+  Black individuals are always the most frequent victims of gun violence
+  in NYC. In addition, they on average make up about 70\% of a given
+  months total victims, and always make up more than 50\% of a given
+  months victims.
+\end{enumerate}
+
+A quick google search will tell you that from U.S. census data, the
+black population of NYC makes up only about 23\% of the total
+population, yet we see here that black individuals in NYC are the
+victims of gun violence almost 75\% percent of the time. A very large
+and concerning discrepancy.
+
+\end{document}

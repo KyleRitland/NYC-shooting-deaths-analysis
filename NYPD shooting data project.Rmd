@@ -1,0 +1,264 @@
+---
+title: "NYPD shooting data project"
+author: "Kyle Ritland"
+date: "2023-02-21"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## What questions do you hope to answer
+
+In this paper I hope to answer three questions:
+
+1.  How have the number of shooting incidents changed over time? Have they changed periodically, have they remained constant over time, have they been increasing or decreasing? Has the same been true for murders?
+
+2.  Are shooting rates a predictor of murder rates?
+
+3.  Have particular ethnic groups been the target of shooting incidents? Has one group been the victim more often than others, have different groups become the majority victimized group over time or has it been roughly consistently one group over time?
+
+## Why are these questions important?
+
+In the United States, a multitude of different racial groups make up the population, and it is important to investigate if or if not all racial and ethnic groups are treated equally, exposed to the same environments that every other racial group is, are at the same level of finanacial security as other groups. For instance, from U.S. census data, we know that the average net worth of a house with a black homeowener was around \$10,000, while for a non-hispanic white homeowner, the average was over \$170,000, a 1,700% difference in net worth (<https://www.census.gov/library/stories/2021/09/understanding-equity-through-census-bureau-data.html>).
+
+With such stark differences between groups existing in the present day, it is important for american citizens to be aware of such differences so that they can affect change in their communities and their country. Many communities across the U.S. are just as racially and ethnically diverse as the country as a whole, sometimes more so. For citizens to better their communities, they have to know what areas of their communities need the most attention, and in many cases, those areas tend to focused on groups of a particular racial identity.
+
+## Libraries to import
+
+```{r libraries}
+library(tidyverse) 
+library(ggplot2)
+library(lubridate)
+```
+
+## Data to get
+
+```{r url_in}
+url_in <- "https://data.cityofnewyork.us/api/views/833y-fsy8/rows.csv?accessType=DOWNLOAD"
+```
+
+```{r data_frame}
+data <- read_csv(url_in)
+```
+
+## Preparing data for analysis
+
+### Clean data for question 1 and 2
+
+1)  Group data by date, convert column 'STATISTICAL_MURDER_FLAG' into numerical format for later summation and create columns for year, month and date.
+
+```{r df_1}
+data_cln <- data %>% group_by(OCCUR_DATE) %>% summarize(Num_shootings = sum(STATISTICAL_MURDER_FLAG) + sum(!STATISTICAL_MURDER_FLAG), Num_murders = sum(STATISTICAL_MURDER_FLAG),) %>% separate("OCCUR_DATE", c("Month", "Day", "Year"), sep = "/",remove = FALSE) %>% ungroup()
+```
+
+2)  Create a new column comprised of only year and month.
+
+```{r new_2}
+data_cln_y_m <- data_cln %>% mutate(Year_Month = as.Date(with(data_cln,paste(Year,Month,"01",sep="-")),format="%Y-%m-%d"), )
+```
+
+3)  Group data by the new year and month column
+
+```{r new_3}
+data_cln_y_m <- data_cln_y_m %>% group_by(Year_Month) %>% summarize(Num_shootings = sum(Num_shootings), Num_murders = sum(Num_murders)) %>% ungroup()
+```
+
+### Clean data for question 3
+
+1)  Group data by date and recorded victim race, convert column 'STATISTICAL_MURDER_FLAG' into numerical format for later summation and create columns for year, month and date.
+
+```{r new1_1}
+ethnicities = sort(unique(data$VIC_RACE))
+
+data_cln_eth <- data %>% group_by(OCCUR_DATE, VIC_RACE) %>% summarize(Num_shootings = sum(STATISTICAL_MURDER_FLAG) + sum(!STATISTICAL_MURDER_FLAG), Num_murders = sum(STATISTICAL_MURDER_FLAG),) %>% separate("OCCUR_DATE", c("Month", "Day", "Year"), sep = "/",remove = FALSE) %>% ungroup()
+```
+
+2)  Create a new column comprised of only year and month.
+
+```{r new1_2}
+data_cln_eth <- data_cln_eth %>% mutate(Year_Month = as.Date(with(data_cln_eth,paste(Year,Month,"01",sep="-")),format="%Y-%m-%d"), )
+```
+
+3)  Group data by the new year/month column and victim raze column
+
+```{r new1_3}
+data_cln_eth_y_m <- data_cln_eth %>% group_by(Year_Month, VIC_RACE) %>% summarize( Num_shootings = sum(Num_shootings), Num_murders = sum(Num_murders)) %>% ungroup()
+```
+
+4.  Combine the data frame from question 1 with the new data frame, so as to pair the total number of shootings and murders with the number of shootings and murders for each victim race category.
+
+```{r new1_4}
+data_cln_eth_y_m <- merge(data_cln_eth_y_m, data_cln_y_m, by=c("Year_Month")) %>% rename("Num_shootings_eth" = "Num_shootings.x", "Num_shootings_tot" = "Num_shootings.y","Num_murders_eth" = "Num_murders.x", "Num_murders_tot" = "Num_murders.y")
+
+```
+
+5.  Use the columns of shootings and murders for each ethnicity category with the total number of shootings and murders to determine the percentage of the data each ethnicity makes up of the total data.
+
+```{r new1_5}
+data_cln_eth_y_m <- data_cln_eth_y_m %>% mutate(shootings_perc = Num_shootings_eth/Num_shootings_tot, murders_perc = Num_murders_eth/Num_murders_tot)
+```
+
+6.  Create a new data frame to record the overall percentage that each ethnic group constitutes of the total data.
+
+```{r new1_6}
+
+data_cln_eth_tots <- data_cln_eth %>% group_by(VIC_RACE) %>% summarize( Num_shootings = sum(Num_shootings), Num_murders = sum(Num_murders)) %>% mutate(Num_shootings_tot = rep(sum(data_cln_y_m$Num_shootings), length.out = length(ethnicities)), Num_murders_tot = rep(sum(data_cln_y_m$Num_murders), length.out = length(ethnicities))) %>% ungroup()
+```
+
+```{r new1_9}
+data_cln_eth_tots <- data_cln_eth_tots %>% mutate(shootings_perc = Num_shootings/Num_shootings_tot, murders_perc = Num_murders/Num_murders_tot)
+
+```
+
+## Model for question 2
+
+Next I will make a linear model of murders as a function of shooting incidents, to see if there is a statistically significant correlation between shooting incident rates and murder rates. Then, I will add that data to the original data frame for use in graphing.
+
+```{r model_1}
+model <- lm(Num_murders ~ Num_shootings, data_cln_y_m)
+
+nyc_final_data <- data_cln_y_m %>% ungroup() %>% mutate( murders_pred= predict(model))
+```
+
+## Analysis
+
+### Analysis of Question 1
+
+Here is a graph of the total shooting incidents over the span of data collection.
+
+```{r plot_1, include=TRUE}
+shootings_plot <- data_cln_y_m %>% ggplot(aes(x = Year_Month)) + geom_area( aes(y = Num_shootings), fill="grey50", color = 1, lwd = 0.5, linetype = 1) + scale_x_date(date_labels = "%Y-%b", date_breaks = "2 year") + scale_y_continuous(limits = c(0,350)) + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) + labs(title="Number of shooting incidents per month,\nJan-2006 to Dec-2022", x= "Year-Month", y = "Number of shooting incidents,\nper month")
+
+plot(shootings_plot)
+```
+
+Interestingly, there does appear to be a cyclical nature to shooting incident rates in NYC over the data collection period. If you look at the peaks and troughs, every peak resides in summer months, while troughs reside in winter months, and shooting incident numbers increasing into the summer peak and decreasing into the winter trough. Every low point of a trough lies on the month of January or February. In addition, shooting rates have been decreasing over time, and decreasing in discrete steps, up until 2020, when the COVID-19 pandemic started.
+
+Now lets look and see if the murder rates in NYC also showed the same seasonal pattern as overall shooting incidents. Below is a graph showing the number of shooting incidents that resulted in murder.
+
+```{r plot_2}
+murders_plot <- data_cln_y_m %>% ggplot(aes(x = Year_Month)) + geom_area( aes(y = Num_murders), fill="red", color = 1, lwd = 0.5, linetype = 1) + scale_x_date(date_labels = "%Y-%b", date_breaks = "2 year") + scale_y_continuous(limits = c(0,350)) + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) + labs(title="Number of murders per month,\n2006-Jan to 2022-Dec", x= "Year-Month", y = "Number of murders,\nper month")
+
+plot(murders_plot)
+```
+
+Next is the same graph magnified.
+
+```{r plot_3}
+murders_plot_zoom <- data_cln_y_m %>% ggplot(aes(x = Year_Month)) + geom_area( aes(y = Num_murders), fill="red", color = 1, lwd = 0.5, linetype = 1) + scale_x_date(date_labels = "%Y-%b", date_breaks = "2 year") + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) + labs(title="Number of murders per month,\n2006-Jan to 2022-Dec", x= "Year-Month", y = "Number of murders,\nper month")
+
+plot(murders_plot_zoom)
+```
+
+This plot does show the same pattern in murder rates as shooting incident rates. You can see the same pattern of deep troughs in winter months and sharp peaks in summer months. This is not unexpected, as it is a simple and reasonable jump to think that murder rates would also follow the same pattern as overall shooting rates. There does seem to be variability in that similarity however, where some summer months have sharp drops in murder rates and a given year can have very similar murder rates month to month, which you can see in 2013. To check and see if there is a statistically significant correlation between shooting rates and murder rates, we move onto the second quesition I wish to answer.
+
+### Analysis of Question 2
+
+Below you will see a scatter plot showing murder rates as a function of shooting incidents, with a liner regression best-fit line running through the entire plot.
+
+```{r plot_4}
+model_plot <- nyc_final_data %>% ggplot(aes(x = Num_shootings)) + geom_point(aes(y=Num_murders)) + geom_line(aes(y = murders_pred, color="red")) + scale_color_manual(labels = c("Model"), values = c('red') ) + guides(color=guide_legend(title="") ) + ggtitle("Number of murders per month\nas a function of total shooting incidents per month") + labs(x= "Shooting incidents per month", y = "Murders per month")
+
+plot(model_plot)
+```
+
+There does appear to be a relationship between shooting rates and murder rates. It is not a very precise relationship, as you can see that there is a large spread over which the data falls, but it is possible to see that the data does cluster along the line drawn by the model. We can inspect the different statistics generated by the model below.
+
+```{r}
+summary(model)
+```
+
+The model determined that it had a multiple R\^2 value of 0.73, indicating that the data doesn't cluster strongly along the best fit line, This checks out, as we can see in the above graph. The model did produce a vanishing p-value, however, which does indicate there is a statistically significant relationship between shooting rates and murder rates.
+
+However, to check and see if there is any pattern in the residuals of the model, we should plot those residuals. You will find that plot below.
+
+```{r plot_5}
+model_res_plot <- ggplot(model, aes(x = .fitted, y=.resid )) + geom_point() + labs(title="Residual plot of model", x= "Predicted murder count", y = "Residual")
+
+plot(model_res_plot)
+```
+
+At first glance, the residuals do look sufficiently random to indicate shooting rates really are a very good predictor of murder rates but if you start on the left and move right, you can see a slight horn shape to the scatter plot. In addition, the chart is not evenly random: there is a clustering of points around murder count = 20. This could indicate that there are other predictors that are unaccounted for or that the kind of regression used it not the right kind, that a different form of regression is needed.
+
+### Analysis of Question 3
+
+To give us a quick overview of how each ethnic group is represented in the data.
+
+Here we have a chart showing normalized total shooting rates per month, where each racial group in the data is represented as a different color and takes up a certain percentage of the total shooting incidents for a given month.
+
+```{r chart per_eth_all, include=TRUE}
+colors_arr <- c("#1e5e02", "#07cbf2","#4daf4a", "#fc0000","#ffff99", "#4a3f4f","#fc00f4")
+
+chart_perc_eth_all <- data_cln_eth_y_m %>% ggplot(aes(x = Year_Month, y = Num_shootings_eth, fill = VIC_RACE)) + geom_area(position ="fill") + scale_x_date(date_labels = "%Y-%b", date_breaks = "2 year") + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) + scale_y_continuous(labels = scales::percent) + labs(title="Percent of total shootings per racial group,\nper month, 2006-Jan to 2021-Dec", x= "Year-Month", y = "Percent of total shootings,\nper racial group, per month")+scale_fill_manual(values=colors_arr) + guides(fill=guide_legend(title="Victim Race"))
+
+plot(chart_perc_eth_all)
+```
+
+As you can see, individuals who identity as black make up the overwhelming majority of victims of shooting violence in NYC over the 15 year time span. Not only are they the ethnic group that is victimized the most on average over the time investigated, they are the ethnic group that has been victimized the most every month of the past 15 years, appearing to make up close to the same percentage of targeted individuals over time.
+
+Below is a chart focusing in on shooting incidents involving black individuals.
+
+```{r chart per_eth_black, include=TRUE}
+
+chart_perc_eth_black <- data_cln_eth_y_m[which(data_cln_eth_y_m$VIC_RACE == ethnicities[3]),] %>% ggplot(aes(x = Year_Month, fill = VIC_RACE)) + geom_col(aes(y = shootings_perc)) + scale_x_date(date_labels="%Y-%b",date_breaks  ="1 year", limits = as.Date(c('2006-01-01','2021-12-01')) )+ scale_y_continuous(labels = scales::percent) +  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1), legend.position = "top") + guides(fill=guide_legend(title="Victim Race")) + labs(title="Percentage of shootings incidents\ninvolving black victims, per month", x= "Year-Month", y = "Percent of total shootings") + scale_fill_manual(values=colors_arr[3]) + guides(fill=guide_legend(title="Victim Race"))
+
+plot(chart_perc_eth_black)
+```
+
+We can see more clearly the month-by-month consistency at which black individuals are the victims of gun violence. This is illustrated most clearly by the chart below.
+
+```{r}
+chart_hist_perc_eth_black <- data_cln_eth_y_m[which(data_cln_eth_y_m$VIC_RACE == ethnicities[3]),] %>% ggplot(aes( x = shootings_perc)) + geom_histogram(aes(fill = colors_arr[3]), bins=30) + scale_x_continuous(labels = scales::percent, limits = c(0,1)) +  theme(legend.position = "top") + labs(title="Histogram of percentage of total shootings involving black victims", x= "Percent of total shootings where vitcim is black", y = "Count") + scale_fill_manual(values=colors_arr[3], labels=c('BLACK')) + guides(fill=guide_legend(title="Victim Race")) 
+
+plot(chart_hist_perc_eth_black)
+```
+
+With this graph, you can see that number of shooting incidents each month involving black individuals make up 60% to 80% of the total shooting instances in NYC over the span of data collection. Below is another chart showing the average rates of shooting incidents involving each ethnic group.
+
+```{r chart shooting_perc_plot, include=TRUE}
+shooting_perc_plot <- data_cln_eth_tots %>% ggplot(aes(x = VIC_RACE, y = shootings_perc, fill = VIC_RACE)) + geom_col() + geom_text(aes(label = paste0(round(shootings_perc*100, 2), "%"), y = shootings_perc + 0.02)) + scale_y_continuous(labels = scales::percent) +  theme(axis.text.x = element_blank()) + scale_fill_manual(values=colors_arr)  + labs(title="Percentage of shooting incidents per racial group,\n2006 to 2022", x= "Victim Race", y = "Percent composition of total\nshooting incidents") + guides(fill=guide_legend(title="Victim Race"))
+
+plot(shooting_perc_plot)
+```
+
+Once again, it is clear to see that black individuals are overwhelmingly the most victimized racial group. From the earlier investigation into whether shooting rates predict murder rates, we can guess that black individuals are also a largely present in murder cases. Lets look at the next chart to see if that is the case.
+
+```{r chart per_eth_black_mur, include=TRUE}
+chart_perc_eth_black_mur <- data_cln_eth_y_m[which(data_cln_eth_y_m$VIC_RACE == ethnicities[3]),] %>% ggplot(aes(x = Year_Month, fill = VIC_RACE)) + geom_col(aes(y = murders_perc)) + scale_x_date(date_labels="%Y-%b",date_breaks  ="1 year", limits = as.Date(c('2006-01-01','2021-12-01')) )+ scale_y_continuous(labels = scales::percent) +  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1), legend.position = "top") + guides(fill=guide_legend(title="Victim Race")) + labs(title="Number of murder per month where victim is black", x= "Year-Month", y = "Number of shooting incidents,\nper month") + scale_fill_manual(values=colors_arr[3]) + guides(fill=guide_legend(title="Victim Race"))
+
+plot(chart_perc_eth_black_mur)
+```
+
+It is clear from this chart that, yes, black individuals are also the most murdered racial group in the data set. As there are many high and low rates in this graph, it will be more helpful to view this data in the form of a histogram.
+
+```{r}
+chart_hist_perc_eth_black_mur <- data_cln_eth_y_m[which(data_cln_eth_y_m$VIC_RACE == ethnicities[3]),] %>% ggplot(aes( x = murders_perc)) + geom_histogram(aes(fill = colors_arr[3]),bins = 20) + scale_x_continuous(labels = scales::percent, limits = c(0,1)) +  theme(legend.position = "top") + labs(title="Histogram of percentage of total murders involving black victims", x= "Percent of total murders where vitcim is black", y = "Count") + scale_fill_manual(values=colors_arr[3], labels=c('BLACK')) + guides(fill=guide_legend(title="Victim Race")) 
+
+plot(chart_hist_perc_eth_black_mur)
+```
+
+As you can see, the distribution of murder rates is greater than for shooting rates, but with an average and median rate that falls at a similar percentage as for shooting rates. Lets inspect the final graphof average murder rates involving each ethnic group.
+
+```{r chart murder_perc_plot, include=TRUE}
+murder_perc_plot <- data_cln_eth_tots %>% ggplot(aes(x = VIC_RACE, y = murders_perc, fill = VIC_RACE)) + geom_col() + geom_text(aes(label = paste0(round(murders_perc*100, 2), "%"), y = murders_perc + 0.02)) + scale_y_continuous(labels = scales::percent) +  theme(axis.text.x = element_blank()) + scale_fill_manual(values=colors_arr) + labs(title="Percentage of murders per racial group,\n2006 to 2022", x= "Victim Race", y = "Percent composition of total murders") + guides(fill=guide_legend(title="Victim Race"))
+
+plot(murder_perc_plot)
+```
+
+From all of these charts you can see that people who identify or had been identified as black are by far the most targeted ethnic group historically. In addition, they constantly make up around 3/4 of the total number of shooting incidents in NYC, fluctuating between just above 50% to over 80% of the total shooting incidents.
+
+## Conclusion
+
+In conclusion, investigating of the data set to answer my questions revealed that
+
+1.  There was a consistent cyclical pattern to the rates of shooting rates and murder rates in NYC, where rates were highest in the summer months, while rates were lowest in the winter monsths,.
+
+2.  Shooting rates by month are a statistically significant predictor of murder rates in NYC, but they are not a great predictor and there could be other factors not accounted for that influence murder rates
+
+3.  Black individuals are always the most frequent victims of gun violence in NYC. In addition, they on average make up about 70% of a given months total victims, and always make up more than 50% of a given months victims.
+
+A quick google search will tell you that from U.S. census data, the black population of NYC makes up only about 23% of the total population, yet we see here that black individuals in NYC are the victims of gun violence almost 75% percent of the time. A very large and concerning discrepancy.
